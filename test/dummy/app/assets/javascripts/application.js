@@ -14,8 +14,9 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+//= require em_search/em-search-tooltip
+//= require em_search/em-search-popover
 
 $(function(){
-  $(".meta-search-link").popover({ placement: 'bottom',
-                       template: '<div class="popover" style="width: auto;"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'});
-})
+  $(".meta-search-link").emPopover({ placement: 'bottom'});
+});

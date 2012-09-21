@@ -1,0 +1,11 @@
+.well
+  = simple_form_for @search, as: :q, url: posts_path, html: {method: :get, class: 'filter-form'} do |f|
+    .row
+      = f.input         :id_in, wrapper_html:{ class: "span3" }, collection: Post.sorted
+      = f.input         :id_in, wrapper_html:{ class: "span3" }, collection: Post.sorted
+      = f.input :name_contains, wrapper_html:{ class: "span3" }
+      = f.input :name_contains, wrapper_html:{ class: "span3" }
+    
+    .form-actions
+      = f.button :submit, "Найти", class: 'btn-primary'
+      = link_to "Очистить", posts_path, class: 'btn'

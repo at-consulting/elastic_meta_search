@@ -1,22 +1,22 @@
 require "simple_form"
 require "meta_search"
 require "elastic_meta_search/view_helpers"
-require "elastic_meta_search/utils"
 
 module ElasticMetaSearch
   mattr_accessor :models
-  
   def self.setup
     yield self
   end
-  
-  def self.user_class
-    @@user_class.constantize
+
+  class Engine < ::Rails::Engine
+    # configure our plugin on boot
+    initializer "elastic_meta_search.initialize" do |app|
+      ActionView::Base.send :include, ElasticMetaSearch::ViewHelpers
+    end
+
   end
-  
 end
 
-ActionView::Base.send :include, ElasticMetaSearch::ViewHelpers
 =begin
 require 'active_record'
 require 'active_support'

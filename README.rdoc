@@ -1,3 +1,37 @@
-= ElasticMetaSearch
+== Meta Search
 
-This project rocks and uses MIT-LICENSE.
+Для расширенного поиска используется гем {meta_search}[https://github.com/ernie/meta_search].
+Чтобы добавить отрисовку расширенного поиска, необходимо завести отдельный паршиал для него и 
+вызвать хелпер +search_bar+ с ключом +:meta_search+.
+
+Параметры +:meta_search+:
+*  +partial+
+*  +render_opts+: данные для паршиала
+*  +class+
+*  +performed+: флаг, выставляющий иконку для уже отфильтрованной страницы
+
+_Пример_:
+
+  search_bar meta_search:{ partial: "search", class: "buildings_adv_search", performed: @search.search_attributes.present? }
+
+Если необходимо добавить JS на всплывающий поповер, то обработайте событие +click+:
+
+  $(".meta-search-link.#{ Ваш класс кнопки }").on('click', function(){
+    // Необходимые JS
+    // ...
+  });
+
+=== Надо кое-что добавить в проект!
+
+В +bootstrap_and_overrides.ccs.less+:
+
+  @iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
+
+В +application.js+:
+
+  //= require em_search/em-search-tooltip
+  //= require em_search/em-search-popover
+  //= require em_search/em-search-main
+
+Важно расположение файлов! Если в +application.js+ файл, в котором идет обработка клика, 
+стоит выше файлов из гема, то работать не будет =)
