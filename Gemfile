@@ -17,3 +17,5 @@ gem "jquery-rails"
 # gem 'debugger'
 gem 'twitter-bootstrap-rails'
 gem 'haml-rails'
+gem "meta_search"
+gem "simple_form"
