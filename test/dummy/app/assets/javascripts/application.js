@@ -12,10 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.all
 //= require twitter/bootstrap
 //= require_tree .
 //= require em_search/em-search-tooltip
 //= require em_search/em-search-popover
+//= require em_search/em-search-main
 
 $(function(){
   $(".meta-search-link").emPopover({ placement: 'bottom'});

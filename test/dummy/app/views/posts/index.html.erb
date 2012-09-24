@@ -1,7 +1,9 @@
 <div class="container-fluid" style="padding-top: 50px;">
   <%= search_bar meta_search: { partial: "search",
                               performed: !@search.search_attributes.empty?,
-                            render_opts: {test: "1221"} } %>
+                            render_opts: {test: "1221"} },
+                 elastic_search: { model: Post,
+                                   input: { name: :name, source: posts_path }} %>
   <h1>Listing posts</h1>
   
   <table>

@@ -10,4 +10,6 @@
  *
  *= require_self
  *= require bootstrap_and_overrides
+ *= require jquery.ui.all
+ *= require em_search/autocomplete
  */
