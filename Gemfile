@@ -19,3 +19,5 @@ gem 'twitter-bootstrap-rails'
 gem 'haml-rails'
 gem "meta_search"
 gem "simple_form"
+gem 'simple_form_autocomplete', github: 'elandesign/simple_form_autocomplete'
+gem "jquery-ui-rails"
