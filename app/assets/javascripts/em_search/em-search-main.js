@@ -1,33 +1,10 @@
 $(function(){
   $(".meta-search-link").emPopover({ placement: 'bottom'});
   
-  var elastic_searches = [
-    {
-      value: "jquery",
-      label: "jQuery",
-      column: "nameaaaaaaaaaaaasdas"
-    },
-    {
-      value: "jquery-ui",
-      label: "jQuery UI",
-      column: "type"
-    },
-    {
-      value: "sizzlejsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      label: "Sizzle JS asdasfdadgfasdgfasdf asdfasdfasdfasdfasdfadfasdf11111111111111111111111111111",
-      column: "name"
-    },
-    {
-      value: "mongodb",
-      label: "mongoDB",
-      column: "size"
-    }
-    
-  ];
-
   $("#elastic_search").autocomplete({
     minLength: 0,
-    source: elastic_searches,
+    source: 'posts/es',
+    minLength: 3,
     focus: function( event, ui ) {
       $( "#project" ).val( ui.item.label );
       return false;
