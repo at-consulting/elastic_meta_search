@@ -1,5 +1,8 @@
 ElasticMetaSearch.setup do |config|
-  config.models = [{ "Post" => "1"
-
-                  }]
+  config.indexes = {
+    Post => {
+              id:   { type: 'integer' },
+              name: { type: 'string', type: 'snowball' }
+    }
+  }
 end

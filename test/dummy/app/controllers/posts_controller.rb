@@ -3,7 +3,7 @@ class PostsController < ApplicationController
     @search = Post.search params[:q]
     @posts = @search.all
   end
-  
+
   def es
     term = "*#{params[:term]}*"
     results = Tire.search('posts') do
