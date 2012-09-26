@@ -1,6 +1,6 @@
 $(function(){
   $(".meta-search-link").emPopover({ placement: 'bottom'});
-  
+
   $("#elastic_search").autocomplete({
     minLength: 0,
     source: 'posts/es',
@@ -14,7 +14,7 @@ $(function(){
       return false;
     }
   });
-  
+
   $("#elastic_search").data("autocomplete")._renderItem = function(ul, item) {
     var term = this.term.split(' ').join('|');
     var re = new RegExp("(" + term + ")", "gi");
@@ -50,7 +50,7 @@ $(function(){
       $(this).outerWidth(Math.max.apply(null, infoWidthAry))
     });
   };
-  
+
   $("#elastic_search").data("autocomplete")._suggest = function( items ) {
     var ul = this.menu.element
       .empty()

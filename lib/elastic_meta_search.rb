@@ -2,6 +2,7 @@ require "simple_form"
 require "tire"
 require "meta_search"
 require "elastic_meta_search/utils"
+require "elastic_meta_search/action_methods"
 require "elastic_meta_search/view_helpers"
 
 module ElasticMetaSearch
@@ -14,6 +15,7 @@ module ElasticMetaSearch
     # configure our plugin on boot
     initializer "elastic_meta_search.initialize" do |app|
       ActionView::Base.send :include, ElasticMetaSearch::ViewHelpers
+      ActionController::Base.send :include, ElasticMetaSearch::ActionMethods
       ElasticMetaSearch::Utils.create_indexes
     end
 
