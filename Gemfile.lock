@@ -139,6 +139,7 @@ GEM
       railties (>= 3.1)
       therubyracer (~> 0.10.2)
     tzinfo (0.3.33)
+    will_paginate (3.0.3)
 
 PLATFORMS
   ruby
@@ -153,3 +154,4 @@ DEPENDENCIES
   simple_form_autocomplete!
   sqlite3
   twitter-bootstrap-rails
+  will_paginate

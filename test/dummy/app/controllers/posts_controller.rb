@@ -12,7 +12,6 @@ class PostsController < ApplicationController
     end.results
     highlights = results.map(&:highlight).flatten.map(&:to_hash)
     res = []
-    raise highlights.inspect
     highlights.each do |hash|
       hash.each do |k,v|
         res << { column: k, value: v.first, label: v.first }
