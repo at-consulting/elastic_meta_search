@@ -5,12 +5,12 @@ module ElasticMetaSearch
     
     def search_bar(opts = {})
       content_tag :div, class: "search input-append" do
-        elastic_search_bar + meta_search_link(opts[:meta_search])
+        elastic_search_bar(opts[:elastic_search]) + meta_search_link(opts[:meta_search])
       end
     end
 
-    def elastic_search_bar
-      text_field_tag(:elastic_search, nil, class: "span4") +
+    def elastic_search_bar(opts = {})
+      text_field_tag(:elastic_search, nil, class: "span4", data: { source: es_path(index: opts.delete(:index)) }) +
       button_tag(:elastic_search, class: "btn")
     end
 

@@ -4,5 +4,3 @@ class PostsController < ApplicationController
     @posts = @search.all
   end
 end
-
-

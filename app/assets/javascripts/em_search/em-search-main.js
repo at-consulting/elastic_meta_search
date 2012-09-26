@@ -3,7 +3,7 @@ $(function(){
 
   $("#elastic_search").autocomplete({
     minLength: 0,
-    source: 'posts/es',
+    source: $("#elastic_search").data('source'),
     minLength: 3,
     focus: function( event, ui ) {
       $( "#project" ).val( ui.item.label );

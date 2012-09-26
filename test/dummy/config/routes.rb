@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :posts do
-    collection do
-      get 'es'
-    end
+  resources :posts
 
-  end
-
+  match '/es' => "application#es", as: :es
 end
