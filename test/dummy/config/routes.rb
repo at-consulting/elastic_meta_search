@@ -2,5 +2,5 @@ Rails.application.routes.draw do
 
   resources :posts
 
-  match '/es' => "application#es", as: :es
+  match '/fs' => "application#fs", as: :fs
 end

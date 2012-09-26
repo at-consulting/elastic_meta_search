@@ -1,21 +1,19 @@
 $(function(){
   $(".meta-search-link").emPopover({ placement: 'bottom'});
-
-  $("#elastic_search").autocomplete({
+  
+  var ac_input = $("#fs_term");
+  
+  ac_input.autocomplete({
     minLength: 0,
-    source: $("#elastic_search").data('source'),
+    source: ac_input.data('source'),
     minLength: 3,
-    focus: function( event, ui ) {
-      $( "#project" ).val( ui.item.label );
-      return false;
-    },
     select: function( event, ui ) {
-      $( "#elastic_search" ).val( ui.item.label );
+      ac_input.val( ui.item.label );
       return false;
     }
   });
 
-  $("#elastic_search").data("autocomplete")._renderItem = function(ul, item) {
+  ac_input.data("autocomplete")._renderItem = function(ul, item) {
     var term = this.term.split(' ').join('|');
     var re = new RegExp("(" + term + ")", "gi");
     var t = item.label.replace(re,"<b>$1</b>");
@@ -33,7 +31,7 @@ $(function(){
        .appendTo(ul);
   };
 
-  $("#elastic_search").data("autocomplete")._resizeMenu = function() {
+  ac_input.data("autocomplete")._resizeMenu = function() {
     var ul = this.menu.element;
     var valueWidthAry = [];
     var  infoWidthAry = [];
@@ -51,7 +49,7 @@ $(function(){
     });
   };
 
-  $("#elastic_search").data("autocomplete")._suggest = function( items ) {
+  ac_input.data("autocomplete")._suggest = function( items ) {
     var ul = this.menu.element
       .empty()
       .zIndex( this.element.zIndex() + 1 )

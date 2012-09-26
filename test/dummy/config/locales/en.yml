@@ -10,6 +10,10 @@ en:
     attributes:
       post:
         id_in: Имя
+  elastic_meta_search:
+    posts:
+      name: 123122
+      author: awdfewfweq
         
     
 

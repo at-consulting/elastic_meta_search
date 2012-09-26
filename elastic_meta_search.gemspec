@@ -10,14 +10,14 @@ Gem::Specification.new do |s|
   s.authors     = ["dtataurov", "ddonskoi"]
   s.email       = ["dtataurov@at-consulting.ru", "ddonskoi@at-consulting.ru"]
   s.homepage    = "https://github.com/at-consulting/elastic_meta_search.git"
-  s.summary     = "https://github.com/at-consulting/elastic_meta_search.git"
-  s.description = "https://github.com/at-consulting/elastic_meta_search.git"
+  s.summary     = ""
+  s.description = ""
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency       "rails", ">= 3.1.3"
-  s.add_dependency        "tire", ">= 0.4.2"
+  s.add_dependency       "tire", ">= 0.4.2"
   # s.add_dependency "jquery-rails"
 
   s.add_development_dependency "sqlite3"
