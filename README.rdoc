@@ -1,3 +1,8 @@
+Укажите в Gemfil'е
+
+  gem 'elastic_meta_search', :git => 'git://github.com/at-consulting/elastic_meta_search'
+
+
 == Meta Search
 
 Для расширенного поиска используется гем {meta_search}[https://github.com/ernie/meta_search].
@@ -13,6 +18,8 @@
 _Пример_:
 
   search_bar meta_search:{ partial: "search", class: "buildings_adv_search", performed: @search.search_attributes.present? }
+
+(о необязательных параметрах для быстрого поиска сказано ниже)
 
 Если необходимо добавить JS на всплывающий поповер, то обработайте событие +click+:
 
@@ -35,3 +42,112 @@ _Пример_:
 
 Важно расположение файлов! Если в +application.js+ файл, в котором идет обработка клика, 
 стоит выше файлов из гема, то работать не будет =)
+
+
+
+== Tire (Elastic Search)
+
+Для быстрого поиска используется гем {tire}[https://github.com/karmi/tire.git].
+
+Для корректного отображения управляющих элементов поиска и pop-over'а версия гема 
+{twitter-bootstrap-rails}[https://github.com/seyhunak/twitter-bootstrap-rails], 
+использующаяся в проекте, должна быть не ниже 2.1.3 
+
+
+=== Что необходимо добавить в проект для работы быстрого поиска
+
+
+В +application.css+:
+
+ *= require em_search/autocomplete
+
+В +app/controllers/application_controller.rb+:
+
+  skip_authorization_check :only => :fs
+  enable_fast_search
+
+В +config/routes.rb+:
+
+  match '/fs' => "application#fs", as: :fs
+
+
+
+==== Определение методов/атрибутов для mapping'а
+
+В initializer'е (например, в +config/initializers/elastic_meta_search.rb+) 
+необходимо определить настройки индексирования для всех моделей (ВМЕСТО блока +mapping+ для каждой из моделей).
+
+_Пример_:
+
+  ElasticMetaSearch.setup do |config|
+    config.indexes = {
+      Post => {
+                name:   { type: 'string' },
+                author: { type: 'string', type: 'snowball' }
+              },
+      Author => {
+                  id:   { type: 'integer' }
+              }
+    }
+
+  end
+
+
+
+Делать в моделях +include+ модулей +Tire+ НЕ требуется.
+
+
+
+=== Обработка поискового запроса в контроллере
+
+Построение логики поиска ложится на плечи разработчика системы.
+
+Пример контроллера:
+
+  def index
+    @search = Post.search params[:q]
+    if params[:fs]
+      if params[:fs][:term].blank?
+        @posts = Post.all
+      else
+        term = "*#{params[:fs][:term]}*"
+        @posts = Tire.search('posts', load: true, default_operator: 'AND') do
+          query { string term }
+        end.results
+      end
+    end
+    @posts ||= @search.all
+  end
+
+
+=== Указание параметров быстрого поиска в +search_bar+
+
+В helper'е +search_bar+ можно указать необязательные параметры для быстрого поиска:
+
+  search_bar meta_search: { ... }, elastic_search: { ... }
+
+
+
+Параметры +elastic_search+:
+
+* +index+: название индекса, в котором следует производить поиск
+  (по умолчанию считается, что используется гем 
+  {inherited_resources}[https://github.com/josevalim/inherited_resources.git], и название индекса совпадает с
+  названием таблицы, связанной с моделью, по которой осуществляется поиск)
+* +display+: список полей, совпадения по которым следует выводить в автокомплите
+  (по умолчанию данный список содержит все проиндексированные поля)
+
+_Пример_:
+
+  search_bar meta_search: { ... }, elastic_search: { index: "posts", display: ["name", "author"] }
+
+=== Переводы названий полей для автокомплита
+
+_Пример_:
+
+  en:
+    elastic_meta_search:
+      posts:
+        name: Название
+        author: Автор
+
