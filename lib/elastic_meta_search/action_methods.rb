@@ -7,7 +7,7 @@ module ElasticMetaSearch
 
     module ClassMethods
       def enable_fast_search
-        def fs
+        define_method "fs" do
           term         = "*#{params[:term]}*"
           index_fields = params[:display]
           results = Tire.search(params[:index]) do
@@ -21,7 +21,7 @@ module ElasticMetaSearch
               data << { column: I18n.t(k, scope: "elastic_meta_search.#{params[:index]}"), value: v.first, label: v.first }
             end
           end
-          
+
           render json: data.uniq.to_json
         end
       end
