@@ -15,8 +15,15 @@ module ElasticMetaSearch
       text_val    = params[:fs][:term] if params[:fs]
 
       form_tag url_for(controller: controller_name, action: action_name), method: :get, style: "display:inline;" do |f|
-        text_field_tag("fs[term]", text_val, class: "span4", data: { source: source }) +
-        button_tag("Найти", disable_with: "Поиск...", class: "btn")
+        tags =
+          text_field_tag("fs[term]", text_val, class: "span4", data: { source: source }) +
+          button_tag("Найти", disable_with: "Поиск...", class: "btn")
+
+        opts.delete(:params).each_pair do |key, val|
+          tags += hidden_field_tag(key, val)
+        end
+
+        tags
       end
     end
 
