@@ -4,7 +4,11 @@ module ElasticMetaSearch
 
     def search_bar(opts = {})
       content_tag :div, class: "search input-append" do
-        elastic_search_bar(opts[:elastic_search] || {}) + meta_search_link(opts[:meta_search])
+          if opts[:meta_search].blank?
+            elastic_search_bar(opts[:elastic_search] || {})
+          else
+            elastic_search_bar(opts[:elastic_search] || {}) + meta_search_link(opts[:meta_search])
+          end
       end
     end
 
