@@ -19,8 +19,11 @@ module ElasticMetaSearch
           text_field_tag("fs[term]", text_val, class: "span4", data: { source: source }) +
           button_tag("Найти", disable_with: "Поиск...", class: "btn")
 
-        opts.delete(:params).each_pair do |key, val|
-          tags += hidden_field_tag(key, val)
+        params = opts.delete(:params)
+        unless params.blank?
+          params.each_pair do |key, val|
+            tags += hidden_field_tag(key, val)
+          end
         end
 
         tags
