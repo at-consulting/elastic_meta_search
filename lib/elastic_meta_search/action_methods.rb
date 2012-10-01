@@ -14,10 +14,10 @@ module ElasticMetaSearch
               data << { column: I18n.t(k, scope: "elastic_meta_search.#{params[:index]}"), value: result.send(k), label: result.send(k) }
             end
           end
-          
+
           render json: data.uniq.to_json
         end
-        
+
         define_method "tire_search_results" do |*args|
           term    = args[0]
           opts    = args[1] || {}
@@ -25,13 +25,13 @@ module ElasticMetaSearch
           fields  = params[:display] || index.classify.constantize.mapping.keys
           term.gsub!(/([\+\!\(\)\{\}\[\]\^\"\~\*\?\:\\-])/, '\\\\\1')
           Tire.search(index, opts) do
-            query { string term, fields: fields }
+            query { string term, fields: fields, default_operator: "AND" }
             highlight(*fields, options: { tag: '' }) if opts.empty?
           end.results
         end
-        
+
         private :tire_search_results
-        
+
       end
     end
   end
