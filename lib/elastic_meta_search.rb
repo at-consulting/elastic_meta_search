@@ -5,9 +5,36 @@ require "elastic_meta_search/view_helpers"
 
 module ElasticMetaSearch
   mattr_accessor :indexes
+  mattr_accessor :index_settings
+  mattr_accessor :default_field_mapping
   def self.setup
     yield self
   end
+  
+  self.index_settings = {
+    analysis: {
+      analyzer: {
+        ngram_analyzer: {
+          type: "custom",
+          tokenizer: "keyword",
+          filter: "ngram_filter"
+        }
+      },
+      filter: {
+        ngram_filter: {
+          type: "nGram",
+          min_gram: 1,
+          max_gram: 100
+        }
+      }
+    }
+  }
+
+  self.default_field_mapping = {
+    type: "string",
+    index_analyzer: "ngram_analyzer",
+    search_analyzer: "keyword"
+  }
 
   class Engine < ::Rails::Engine
     # configure our plugin on boot

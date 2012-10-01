@@ -16,7 +16,7 @@ module ElasticMetaSearch
       url_index   = opts.delete(  :index) || resource_class.model_name.underscore.pluralize
       url_display = opts.delete(:display) || url_index.classify.constantize.mapping.keys
       source      = fs_path(index: url_index, display: url_display)
-      text_val    = params[:fs][:term] if params[:fs]
+      text_val    = params[:fs][:term].gsub(/(\\)(.)/, '\2') if params[:fs]
 
       form_tag url_for(controller: controller_name, action: action_name), method: :get, style: "display:inline;" do |f|
         tags =

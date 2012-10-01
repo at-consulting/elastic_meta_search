@@ -5,10 +5,7 @@ class PostsController < InheritedResources::Base
       if params[:fs][:term].blank?
         @posts = Post.all
       else
-        term = "*#{params[:fs][:term]}*"
-        @posts = Tire.search('posts', load: true, default_operator: 'AND') do
-          query { string term }
-        end.results
+        @posts = tire_search_results params[:fs][:term], load: true
       end
     end
     @posts ||= @search.all
