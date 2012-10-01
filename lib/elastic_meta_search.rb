@@ -10,7 +10,7 @@ module ElasticMetaSearch
   def self.setup
     yield self
   end
-  
+
   self.index_settings = {
     analysis: {
       analyzer: {
@@ -18,6 +18,11 @@ module ElasticMetaSearch
           type: "custom",
           tokenizer: "keyword",
           filter: ["lowercase","ngram_filter"]
+        },
+        keyword_analyzer: {
+          type: "custom",
+          tokenizer: "keyword",
+          filter: ["lowercase"]
         }
       },
       filter: {
@@ -33,7 +38,7 @@ module ElasticMetaSearch
   self.default_field_mapping = {
     type: "string",
     index_analyzer: "ngram_analyzer",
-    search_analyzer: "keyword"
+    search_analyzer: "keyword_analyzer"
   }
 
   class Engine < ::Rails::Engine
