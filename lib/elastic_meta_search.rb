@@ -17,7 +17,7 @@ module ElasticMetaSearch
         ngram_analyzer: {
           type: "custom",
           tokenizer: "keyword",
-          filter: "ngram_filter"
+          filter: ["lowercase","ngram_filter"]
         }
       },
       filter: {
