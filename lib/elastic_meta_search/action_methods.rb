@@ -26,6 +26,7 @@ module ElasticMetaSearch
           term.gsub!(/([\+\!\(\)\{\}\[\]\^\"\~\*\?\:\\-])/, '\\\\\1')
           Tire.search(index, opts) do
             query { string term, fields: fields, default_operator: "AND" }
+            size index.camelize.classify.constantize.count
             highlight(*fields, options: { tag: '' }) if opts.empty?
           end.results
         end
