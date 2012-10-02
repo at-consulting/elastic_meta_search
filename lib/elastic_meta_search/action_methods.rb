@@ -21,8 +21,8 @@ module ElasticMetaSearch
         define_method "tire_search_results" do |*args|
           term    = args[0]
           opts    = args[1] || {}
-          index   = params[:index]   || resource_class.model_name.underscore.pluralize
-          fields  = params[:display] || ElasticMetaSearch.indexes[index.classify.constantize]
+          index   = params[:index]   || opts[:index]   || resource_class.model_name.underscore.pluralize
+          fields  = params[:display] || opts[:display] || ElasticMetaSearch.indexes[index.classify.constantize]
           term.gsub!(/([\+\!\(\)\{\}\[\]\^\"\~\*\?\:\\-])/, '\\\\\1')
           Tire.search(index, opts) do
             query { string term, fields: fields, default_operator: "AND" }
