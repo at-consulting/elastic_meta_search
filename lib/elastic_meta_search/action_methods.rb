@@ -22,7 +22,7 @@ module ElasticMetaSearch
           term    = args[0]
           opts    = args[1] || {}
           index   = params[:index]   || resource_class.model_name.underscore.pluralize
-          fields  = params[:display] || index.classify.constantize.mapping.keys
+          fields  = params[:display] || ElasticMetaSearch.indexes[index.classify.constantize]
           term.gsub!(/([\+\!\(\)\{\}\[\]\^\"\~\*\?\:\\-])/, '\\\\\1')
           Tire.search(index, opts) do
             query { string term, fields: fields, default_operator: "AND" }
