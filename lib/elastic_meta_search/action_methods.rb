@@ -9,7 +9,7 @@ module ElasticMetaSearch
       def enable_fast_search
         define_method "fs" do
           data = []
-          tire_search_results(params[:term]).each do |result|
+          tire_search_results(params[:term], { :autocomplete => true } ).each do |result|
             result.highlight.to_hash.each do |k,v|
               data << { column: I18n.t(k, scope: "elastic_meta_search.#{params[:index]}"), value: result.send(k), label: result.send(k) }
             end
@@ -27,7 +27,7 @@ module ElasticMetaSearch
           Tire.search(index, opts) do
             query { string term, fields: fields, default_operator: "AND" }
             size index.camelize.classify.constantize.count
-            highlight(*fields, options: { tag: '' }) if opts.empty?
+            highlight(*fields, options: { tag: '' }) if opts[:autocomplete]
           end.results
         end
 
