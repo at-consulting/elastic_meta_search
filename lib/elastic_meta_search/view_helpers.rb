@@ -20,7 +20,7 @@ module ElasticMetaSearch
 
       form_tag url_for(controller: controller_name, action: action_name), method: :get, style: "display:inline;" do |f|
         tags =
-          text_field_tag("fs[term]", text_val, class: "span4", data: { source: source }) +
+          text_field_tag("fs[term]", text_val, class: "span4 fast-search-input", data: { source: source }) +
           button_tag("Найти", disable_with: "Поиск...", class: "btn")
 
         params = opts.delete(:params)
@@ -43,7 +43,7 @@ module ElasticMetaSearch
     end
 
     def meta_search_link_name(performed = false)
-      ('<span class="caret"/>' + (performed ? '<i class="icon-filter"></i>' : '')).html_safe
+      ('<span class="caret"/>' + (performed ? '<i class="icon-filter"></i>' : '') + '</span>').html_safe
     end
   end
 end

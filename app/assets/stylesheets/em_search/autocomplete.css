@@ -9,3 +9,8 @@ span.value{
 span.info {
   float:right;
 }
+
+input.fast-search-input {
+  height: 30px !important;
+  min-height: 20px !important;
+}
