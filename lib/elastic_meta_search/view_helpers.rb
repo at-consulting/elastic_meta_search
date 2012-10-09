@@ -4,11 +4,7 @@ module ElasticMetaSearch
 
     def search_bar(opts = {})
       content_tag :div, class: "search input-append" do
-          if opts[:meta_search].blank?
-            elastic_search_bar(opts[:elastic_search] || {})
-          else
-            elastic_search_bar(opts[:elastic_search] || {}) + meta_search_link(opts[:meta_search])
-          end
+        elastic_search_bar(opts[:elastic_search] || {}) + (meta_search_link(opts[:meta_search]) unless opts[:meta_search].blank?)
       end
     end
 
@@ -26,7 +22,9 @@ module ElasticMetaSearch
         params = opts.delete(:params)
         unless params.blank?
           params.each_pair do |key, val|
-            tags += hidden_field_tag(key, val)
+            Array.wrap(val).each do |value|
+              tags += hidden_field_tag(key, value)
+            end
           end
         end
 
@@ -37,13 +35,13 @@ module ElasticMetaSearch
     def meta_search_link(opts={})
       link_to(meta_search_link_name(opts[:performed]),
               '#',
-              class: "btn meta-search-link #{opts[:class]}",
+              class: "btn btn-link meta-search-link #{opts[:class]}",
               title: 'Расширенный поиск',
               "data-content" => "#{ render(opts[:partial], opts[:render_opts]).html_safe }")
     end
 
     def meta_search_link_name(performed = false)
-      ('<span class="caret"/>' + (performed ? '<i class="icon-filter"></i>' : '') + '</span>').html_safe
+      (performed ? 'Изменить параметры поиска' : 'Расширенный поиск').html_safe
     end
   end
 end
