@@ -5,6 +5,7 @@ require "elastic_meta_search/view_helpers"
 
 module ElasticMetaSearch
   mattr_accessor :indexes
+  mattr_accessor :filters
   mattr_accessor :index_settings
   mattr_accessor :default_field_mapping
   def self.setup
