@@ -10,6 +10,8 @@ module ElasticMetaSearch
   mattr_accessor :default_field_mapping
   def self.setup
     yield self
+    ElasticMetaSearch.indexes ||= {}
+    ElasticMetaSearch.filters ||= {}
   end
 
   self.index_settings = {
