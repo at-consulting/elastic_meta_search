@@ -19,7 +19,7 @@ gem 'twitter-bootstrap-rails'
 gem 'haml-rails'
 gem "meta_search"
 gem "simple_form"
-gem 'simple_form_autocomplete', github: 'elandesign/simple_form_autocomplete'
+gem "simple_form_autocomplete" , :git => 'git://github.com/elandesign/simple_form_autocomplete.git'
 gem "jquery-ui-rails"
 gem "will_paginate"
 gem "inherited_resources"
