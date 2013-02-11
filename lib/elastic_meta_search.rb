@@ -9,7 +9,11 @@ module ElasticMetaSearch
   mattr_accessor :index_settings
   mattr_accessor :default_field_mapping
   def self.setup
-    yield self
+    begin
+      yield self
+    rescue
+      puts "ElasticMetaSearch::WrongConfig 'Cannot create indexes because of wrong config. Please, check you classnames or another parts of code. It is possible, that you just have not migrated database.' "
+    end
     ElasticMetaSearch.indexes ||= {}
     ElasticMetaSearch.filters ||= {}
   end
