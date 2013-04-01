@@ -23,7 +23,7 @@ module ElasticMetaSearch
           opts    = args[1] || {}
           index   = params[:index]   || opts[:index]   || resource_class.model_name.underscore.pluralize
           fields  = params[:display] || opts[:display] || ElasticMetaSearch.indexes[index.classify.constantize]
-          filters = params[:filters]
+          filters = params[:filters] || opts[:filters]
           size = (opts[:autocomplete] ? 10 : index.camelize.classify.constantize.count )
           term.gsub!(/([\+\!\(\)\{\}\[\]\^\"\~\*\?\:\\-])/, '\\\\\1')
           Tire.search(index, opts) do
