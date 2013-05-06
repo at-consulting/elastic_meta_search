@@ -17,7 +17,7 @@ module ElasticMetaSearch
 
       form_tag url_for(controller: controller_name, action: action_name), method: :get, style: "display:inline;" do |f|
         tags =
-          text_field_tag("fs[term]", text_val, class: "span4 fast-search-input", data: { source: source }) +
+          text_field_tag("fs[term]", text_val, class: "span4 fast-search-input", maxlength: "255", data: { source: source }) +
           button_tag("Найти", disable_with: "Поиск...", class: "btn")
 
         params = opts.delete(:params)
