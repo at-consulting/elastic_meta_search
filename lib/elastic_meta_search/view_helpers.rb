@@ -12,12 +12,13 @@ module ElasticMetaSearch
       url_index   = opts.delete(  :index) || resource_class.model_name.underscore.pluralize
       url_display = opts.delete(:display) || ElasticMetaSearch.indexes[url_index.classify.constantize]
       url_filters = opts.delete(:filters)
+      placeholder = opts.delete(:placeholder)
       source      = fs_path(index: url_index, display: url_display, filters: url_filters)
       text_val    = params[:fs][:term].gsub(/(\\)(.)/, '\2') if params[:fs]
 
       form_tag url_for(controller: controller_name, action: action_name), method: :get, style: "display:inline;" do |f|
         tags =
-          text_field_tag("fs[term]", text_val, class: "span4 fast-search-input", maxlength: "255", data: { source: source }) +
+          text_field_tag("fs[term]", text_val, class: "span4 fast-search-input", maxlength: "255", placeholder: placeholder, data: { source: source }) +
           button_tag("Найти", disable_with: "Поиск...", class: "btn")
 
         params = opts.delete(:params)
