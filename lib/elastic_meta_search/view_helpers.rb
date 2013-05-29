@@ -19,7 +19,7 @@ module ElasticMetaSearch
       form_tag url_for(controller: controller_name, action: action_name), method: :get, style: "display:inline;" do |f|
         tags =
           text_field_tag("fs[term]", text_val, class: "span4 fast-search-input", maxlength: "255", placeholder: placeholder, data: { source: source }) +
-          button_tag("Найти", disable_with: "Поиск...", class: "btn")
+          button_tag("Найти", disable_with: "Поиск...", class: "btn jstorage-cleanup")
 
         params = opts.delete(:params)
         unless params.blank?
