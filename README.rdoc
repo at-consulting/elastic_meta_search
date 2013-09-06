@@ -147,3 +147,16 @@ _Пример_:
         name: Название
         author: Автор
 
+=== Переводы для формы поиска (добавить в своем проекте)
+  ru:
+    elastic_meta_search:
+      search: Найти
+      searching: Поиск...
+      change: Изменить параметры поиска
+      advanced: Расширенный поиск
+  en:
+    elastic_meta_search:
+      search: Search
+      searching: Searching
+      change: Change filters
+      advanced: Advanced search
