@@ -19,7 +19,7 @@ module ElasticMetaSearch
       form_tag url_for(controller: controller_name, action: action_name), method: :get, style: "display:inline;" do |f|
         tags =
           text_field_tag("fs[term]", text_val, class: "span4 fast-search-input", maxlength: "255", placeholder: placeholder, data: { source: source }) +
-          button_tag("Найти", disable_with: "Поиск...", class: "btn jstorage-cleanup")
+          button_tag(I18n.t('elastic_meta_search.search'), disable_with: t('elastic_meta_search.searching'), class: "btn jstorage-cleanup")
 
         params = opts.delete(:params)
         unless params.blank?
@@ -38,12 +38,12 @@ module ElasticMetaSearch
       link_to(meta_search_link_name(opts[:performed]),
               '#',
               class: "btn btn-link meta-search-link #{opts[:class]}",
-              title: 'Расширенный поиск',
+              title: I18n.t('elastic_meta_search.advanced'),
               "data-content" => "#{ render(opts[:partial], opts[:render_opts]).html_safe }")
     end
 
     def meta_search_link_name(performed = false)
-      (performed ? 'Изменить параметры поиска' : 'Расширенный поиск').html_safe
+      (performed ? I18n.t('elastic_meta_search.change') : I18n.t('elastic_meta_search.advanced')).html_safe
     end
   end
 end
