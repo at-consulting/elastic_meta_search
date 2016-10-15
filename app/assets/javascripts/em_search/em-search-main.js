@@ -55,8 +55,6 @@ $(function(){
         .zIndex( this.element.zIndex() + 1 )
         .outerWidth(""); // that was added
       this._renderMenu( ul, items );
-      this.menu.deactivate();
-      this.menu.refresh();
 
       ul.show();
       this._resizeMenu();
