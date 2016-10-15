@@ -9,7 +9,7 @@ module ElasticMetaSearch
     end
 
     def elastic_search_bar(opts)
-      url_index   = opts.delete(  :index) || resource_class.model_name.underscore.pluralize
+      url_index   = opts.delete(  :index) || resource_class.model_name.plural
       url_display = opts.delete(:display) || ElasticMetaSearch.indexes[url_index.classify.constantize]
       url_filters = opts.delete(:filters)
       placeholder = opts.delete(:placeholder)

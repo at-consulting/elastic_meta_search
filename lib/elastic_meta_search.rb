@@ -44,7 +44,7 @@ module ElasticMetaSearch
 
   self.default_field_mapping = {
     type: "string",
-    index_analyzer: "ngram_analyzer",
+    analyzer: "ngram_analyzer",
     search_analyzer: "keyword_analyzer"
   }
 

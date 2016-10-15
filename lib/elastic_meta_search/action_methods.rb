@@ -21,7 +21,7 @@ module ElasticMetaSearch
         define_method "tire_search_results" do |*args|
           term    = args[0]
           opts    = args[1] || {}
-          index   = params[:index]   || opts[:index]   || resource_class.model_name.underscore.pluralize
+          index   = params[:index]   || opts[:index]   || resource_class.model_name.plural
           fields  = params[:display] || opts[:display] || ElasticMetaSearch.indexes[index.classify.constantize]
           filters = params[:filters] || opts[:filters]
           size = (opts[:autocomplete] ? 10 : index.camelize.classify.constantize.count )

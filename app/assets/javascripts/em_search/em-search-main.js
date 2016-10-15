@@ -13,7 +13,7 @@ $(function(){
       }
     });
 
-    ac_input.data("autocomplete")._renderItem = function(ul, item) {
+    ac_input.data("ui-autocomplete")._renderItem = function(ul, item) {
       var term = this.term.split(' ').join('|');
       var re = new RegExp("(" + term + ")", "gi");
       var t = item.label.replace(re,"<b>$1</b>");
@@ -31,7 +31,7 @@ $(function(){
          .appendTo(ul);
     };
 
-    ac_input.data("autocomplete")._resizeMenu = function() {
+    ac_input.data("ui-autocomplete")._resizeMenu = function() {
       var ul = this.menu.element;
       var valueWidthAry = [];
       var  infoWidthAry = [];
@@ -49,7 +49,7 @@ $(function(){
       });
     };
 
-    ac_input.data("autocomplete")._suggest = function( items ) {
+    ac_input.data("ui-autocomplete")._suggest = function( items ) {
       var ul = this.menu.element
         .empty()
         .zIndex( this.element.zIndex() + 1 )
