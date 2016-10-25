@@ -26,6 +26,7 @@ $(function(){
       };
       var renderContent = $("<a><span class='value'>" + t + "</span><span class='founded-parameter label label-info'>" + item.column + "</span></a>");
       return $("<li></li>")
+         .addClass("ui-menu-item")
          .data("item.autocomplete", item)
          .append( renderContent )
          .appendTo(ul);
